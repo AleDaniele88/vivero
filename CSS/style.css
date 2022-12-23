@@ -1,0 +1,33 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Roboto Slab", serif;
+  }
+
+  ul, ol {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+
+  .li__nav{
+    padding: 10px;
+  }
+
+  .my-card{
+    margin: 30px;
+    padding: 10px;
+  }
+
+  .btn-carry{
+    background-color: lightgreen;
+    font-size: .8rem;
+  }
+
+  .btn-carry:hover{
+    background-color: lightgreen;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.356);
+  }
