@@ -41,12 +41,39 @@ let contenedor = document.getElementById("contenedor");
 let modal = document.querySelector(".modal-body")
 let carritoContenedor = document.getElementById("carrito-contenedor")
 let vaciarCarrito = document.getElementById("vaciar-carrito");
+let continuarCompra = document.getElementById("continuar-compra");
+let totalCarrito = document.getElementById("total-carrito");
+let btnVolver = document.getElementById("btn-volver");
+let montoTotal;
 
 
 document.addEventListener("DOMContentLoaded", () => {
     carrito = JSON.parse(localStorage.getItem('carrito'));
     mostrarCarrito();
+    refreshCarritoContenedor()
 })
+vaciarCarrito.addEventListener("click", ()=>{
+    carrito = [];
+    mostrarCarrito();
+    refreshCarritoContenedor()
+})
+continuarCompra.addEventListener("click", ()=>{
+    if(carrito.length === 0){
+        Swal.fire({
+            title: 'Tu carrito está vacio',
+            text: 'No has adquirido ningún producto',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+    }
+    else{
+        location.href = "compra.html"
+    }
+});
+
+
+
+
 
 
 stockProducts.forEach(element => {
@@ -67,14 +94,27 @@ stockProducts.forEach(element => {
 });
 
 function agregarProducto(id){
-    const item = stockProducts.find((product)=>product.id === id)       
-    carrito.push(item);
+    const item = stockProducts.find((product)=>product.id === id)     
+    if(!carrito.includes(item)){
+        carrito.push(item);
+    } 
+    else{
+        carrito.forEach(element => {
+            if(element.id === id){
+                element.quantity++;
+            }
+        });
+    }
+
+    
     mostrarCarrito();
     refreshCarritoContenedor();
 }
 
 function mostrarCarrito(){
-    modal.innerHTML = "";
+    modal.innerHTML = " ";
+    montoTotal = 0;
+
     carrito.forEach(product => {
         const {id, name, quantity, desc, price, img} = product;
         modal.innerHTML += `
@@ -88,9 +128,15 @@ function mostrarCarrito(){
             </div>
         </div>
         `
+
+        montoTotal += price*quantity;
+        totalCarrito.textContent = " " + montoTotal;
     })
     if(carrito.length === 0){
         modal.innerHTML = `<p>Aun no agregaste productos</p>`
+        montoTotal = 0;
+        totalCarrito.textContent = " " + montoTotal;
+
     }
     guardarStorage();
 }
@@ -111,9 +157,5 @@ function refreshCarritoContenedor(){
     carritoContenedor.textContent = carrito.length;
 }
 
-vaciarCarrito.addEventListener("click", ()=>{
-    carrito = [];
-    mostrarCarrito();
-    refreshCarritoContenedor()
 
-})
+

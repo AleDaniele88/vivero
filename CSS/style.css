@@ -28,12 +28,12 @@
     font-size: .8rem;
   }
 
-  .btn-carry-container{
+  .btn-container{
     position: relative;
     z-index: 10;
   }
 
-  .btn-carry{
+  .btn-nav{
     position: absolute;
     right: 80px;
     top: 35px;
