@@ -19,9 +19,11 @@
   <header class="sticky-top">
 
     <div class="btn-container">
-      <button type="button" class="btn btn-nav" data-bs-toggle="modal" data-bs-target="#modal">
+      <button type="button" class="btn btn-nav" id="btn-carrito" data-bs-toggle="modal" data-bs-target="#modal-carrito">
         <i class="fa-solid fa-cart-shopping" id="carrito-contenedor">0</i>
       </button>
+      <button type="button" class="btn btn-success btn-log d-none" id="btn-login" data-bs-toggle="modal" data-bs-target="#modal-login">Login</button>
+      <button type="button" class="btn btn-danger btn-log" id="btn-logout">Logout</button>
     </div>
 
     <nav class="navbar navbar-expand-lg bg-light">
@@ -67,9 +69,9 @@
   </header>
 
   <main>
-    <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <!-- Modal carrito-->
+    <div class="modal fade" id="modal-carrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Carrito</h1>
@@ -87,6 +89,27 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal login-->
+<div class="modal fade" id="modal-login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="d-block m-2" id="user-log" placeholder="Ingrese su usuario" required>
+        <input type="password" class="d-block m-2" id="pass-log" placeholder="Ingrese su contraseña" required>
+        <input type="checkbox" id="check">
+        <label for="check">Recordarme</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btn-ingresar" data-bs-dismiss="modal">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <div class="d-flex flex-wrap justify-content-around" id="contenedor">
 

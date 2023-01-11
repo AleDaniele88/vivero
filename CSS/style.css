@@ -39,6 +39,13 @@
     top: 35px;
   }
 
+  .btn-log{
+    position: absolute;
+    right: 140px;
+    top: 35px;
+  }
+
+
   .logo{
     color: olive;
     font-size: 3rem;;
