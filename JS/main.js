@@ -5,7 +5,7 @@ const stockProducts = [
         quantity: 1,
         desc: "Planta para interiores, ideal para verano",
         price: 150,
-        img: "../../ASSETS/planta.jpg"
+        img: "../ASSETS/planta.jpg"
     },
 
     {
@@ -14,7 +14,7 @@ const stockProducts = [
         quantity: 1,
         desc: "Planta para interiores, ideal para verano",
         price: 150,
-        img: "../../ASSETS/planta.jpg"
+        img: "../ASSETS/planta.jpg"
     },
 
     {
@@ -23,7 +23,7 @@ const stockProducts = [
         quantity: 1,
         desc: "Planta para interiores, ideal para verano",
         price: 150,
-        img: "../../ASSETS/planta.jpg"
+        img: "../ASSETS/planta.jpg"
     },
 
     {
@@ -32,7 +32,7 @@ const stockProducts = [
         quantity: 1,
         desc: "Planta para interiores, ideal para verano",
         price: 150,
-        img: "../../ASSETS/planta.jpg"
+        img: "../ASSETS/planta.jpg"
     }
 ]
 
