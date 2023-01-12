@@ -36,12 +36,12 @@ const stockProducts = [
     }
 ]
 
-const dataUsers = [
-    {user: "Coderhouse", pass: 1234, carrito:0},
-    {user: "Ale Daniele", pass:4321, carrito:0}
+let dataUsers = [
+    {user: "Coderhouse", pass: "1234", carrito:0},
+    {user: "Ale Daniele", pass:"4321", carrito:0}
 ];
 
-localStorage.setItem("dataUsers", JSON.stringify(dataUsers));
+dataUsers = JSON.parse(localStorage.getItem("dataUsers"));
 
 
 let carrito = [];
@@ -60,16 +60,35 @@ let btnLogin = document.getElementById("btn-login");
 let btnLogout = document.getElementById("btn-logout");
 let btnCarrito = document.getElementById("btn-carrito");
 let check = document.getElementById("check");
+let btnReg = document.getElementById("btn-reg");
+let btnRegOk = document.getElementById("btn-reg-ok");
+let userReg = document.getElementById("user-reg");
+let passReg = document.getElementById("pass-reg");
 
 
-//Mostrar los elementos sin log
+
+
 logout();
+
 
 btnIngresar.addEventListener("click", login);
 btnLogout.addEventListener("click", logout);
 
+// Registro de nuevos usuarios
+btnRegOk.addEventListener("click", ()=>{
+    const found = dataUsers.find((element)=>(element.user===userReg.value))
+    if(found){
+        alert("Su usuario ya existe")
+    }
+    else{
+        dataUsers.push({user: userReg.value, pass: passReg.value, carrito: 0})
+        localStorage.setItem("dataUsers", JSON.stringify(dataUsers));
+    }
+    console.log(dataUsers)
+})
+
 function login(){
-    
+        
         recordarCuenta();
 
         dataUsers.forEach((item)=>{
@@ -94,6 +113,7 @@ function login(){
                 btnLogin.classList.toggle("d-none");
                 btnLogout.classList.toggle("d-none");
                 btnCarrito.classList.toggle("d-none");
+                btnReg.classList.toggle("d-none");
                 
 
 
@@ -102,6 +122,7 @@ function login(){
 }
 
 function logout(){
+
     check.checked = localStorage.getItem("check");
     userLog.value = localStorage.getItem("userLog")||"";
     passLog.value = localStorage.getItem("passLog")||"";
@@ -124,6 +145,7 @@ function logout(){
     btnLogin.classList.toggle("d-none");
     btnLogout.classList.toggle("d-none");
     btnCarrito.classList.toggle("d-none");
+    btnReg.classList.toggle("d-none");
 }
 
 
@@ -134,7 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     check.checked = localStorage.getItem("check");
     userLog.value = localStorage.getItem("userLog")||"";
     passLog.value = localStorage.getItem("passLog")||"";
+    
 })
+
 vaciarCarrito.addEventListener("click", ()=>{
     carrito = [];
     mostrarCarrito();
@@ -168,7 +192,20 @@ function agregarProducto(id){
         });
     }
 
-    
+    Toastify({
+        text: "Producto agregado al carrito",
+        duration: 3000,
+        newWindow: true,
+        
+        gravity: "bottom", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        
+      }).showToast()
+
     mostrarCarrito();
     refreshCarritoContenedor();
 }
