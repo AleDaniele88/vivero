@@ -125,17 +125,25 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Registre su cuenta</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <input type="text" class="d-block m-2" id="user-reg" placeholder="Ingrese su usuario" required>
-        <input type="password" class="d-block m-2" id="pass-reg" placeholder="Ingrese su contraseña" required>
-        <!-- <input type="password" class="d-block m-2" id="pass-reg-confirm" placeholder="Repita su contraseña" required> -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id ="btn-reg-ok"data-bs-dismiss="modal">Registrarme</button>
-      </div>
+      
+          <div class="modal-body">
+            <form action="" id="form-reg">
+              <input type="text" class="d-block m-2" id="user-reg" placeholder="Ingrese su usuario" required>
+              <input type="password" class="d-block m-2" id="pass-reg" placeholder="Ingrese su contraseña" required>
+              <!-- <input type="password" class="d-block m-2" id="pass-reg-confirm" placeholder="Repita su contraseña" required> -->
+              <button type="submit" class="btn btn-secondary" id ="btn-reg-ok">Registrarme</button>
+            </form> 
+          </div>
+          
+         
     </div>
   </div>
+ 
 </div>
+    <form class="form-buscar d-none" id="form-buscar">
+      <input type="text" id="input-buscar">
+      <label for="input-buscar">Busca tu planta</label>
+    </form>
 
     <div class="d-flex flex-wrap justify-content-around" id="contenedor">
 

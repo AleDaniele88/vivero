@@ -23,6 +23,10 @@
     padding: 10px;
   }
 
+  .card-img-top{
+    height: 200px;
+  }
+
   .btn-addcarry{
     background-color: lightgreen;
     font-size: .8rem;
@@ -40,10 +44,19 @@
     font-size: .67rem;
   }
 
+  .btn-buscar{
+    font-size: .67rem;
+  }
+
 
   .logo{
     color: olive;
     font-size: 3rem;;
     padding: 15px;
   }
+
+.form-buscar{
+  margin-top:30px;
+  text-align: center;
+}
 

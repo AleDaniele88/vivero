@@ -1,47 +1,26 @@
-const stockProducts = [
-    {
-        id:1,
-        name: "Planta 1",
-        quantity: 1,
-        desc: "Planta para interiores, ideal para verano",
-        price: 150,
-        img: "../ASSETS/planta.jpg"
-    },
 
-    {
-        id:2,
-        name: "Planta 2",
-        quantity: 1,
-        desc: "Planta para interiores, ideal para verano",
-        price: 150,
-        img: "../ASSETS/planta.jpg"
-    },
 
-    {
-        id:3,
-        name: "Planta 3",
-        quantity: 1,
-        desc: "Planta para interiores, ideal para verano",
-        price: 150,
-        img: "../ASSETS/planta.jpg"
-    },
+const stockProducts = [];
 
-    {
-        id:4,
-        name: "Planta 4",
-        quantity: 1,
-        desc: "Planta para interiores, ideal para verano",
-        price: 150,
-        img: "../ASSETS/planta.jpg"
+
+const pedirProductos = async () => {
+    const resp = await fetch("../stock.json");
+    const data = await resp.json();
+    data.forEach((product)=>{
+                stockProducts.push(product)
+                })
+    logout();
     }
-]
+
+pedirProductos();
+
 
 let dataUsers = [
     {user: "Coderhouse", pass: "1234", carrito:0},
     {user: "Ale Daniele", pass:"4321", carrito:0}
 ];
 
-dataUsers = JSON.parse(localStorage.getItem("dataUsers"));
+dataUsers = JSON.parse(localStorage.getItem("dataUsers"))||[];
 
 
 let carrito = [];
@@ -64,42 +43,62 @@ let btnReg = document.getElementById("btn-reg");
 let btnRegOk = document.getElementById("btn-reg-ok");
 let userReg = document.getElementById("user-reg");
 let passReg = document.getElementById("pass-reg");
+let loginOk = false;
+let formReg = document.getElementById("form-reg");
+let btnBuscar = document.getElementById("btn-buscar");
+let inputBuscar = document.getElementById("input-buscar");
+let formBuscar = document.getElementById("form-buscar");
+let bandera;
+let productosFiltrados = [];
 
+// loginOk = localStorage.getItem("loginOk")||false;
 
-
+// if(loginOk) {
+//     logout();
+//      login();
+//  }else{
+//    logout();
+//  }
 
 logout();
-
 
 btnIngresar.addEventListener("click", login);
 btnLogout.addEventListener("click", logout);
 
 // Registro de nuevos usuarios
-btnRegOk.addEventListener("click", ()=>{
+formReg.addEventListener("submit", ()=>{
+    
+    
     const found = dataUsers.find((element)=>(element.user===userReg.value))
     if(found){
-        alert("Su usuario ya existe")
+        Swal.fire({
+            title: 'Su usuario ya existe',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          })
     }
     else{
         dataUsers.push({user: userReg.value, pass: passReg.value, carrito: 0})
         localStorage.setItem("dataUsers", JSON.stringify(dataUsers));
     }
-    console.log(dataUsers)
 })
 
 function login(){
         
+        localStorage.setItem("loginOk", true)
+
         recordarCuenta();
 
         dataUsers.forEach((item)=>{
             if((item.user==userLog.value)&&(item.pass==passLog.value)){
                 contenedor.innerHTML = "";
+                bandera = true;
                 stockProducts.forEach(element => {
     
                     const {id, name, quantity, desc, price, img} = element;
                     contenedor.innerHTML += `
                     <div class="card my-card" style="width: 18rem;">
-                        <img src="${img}" class="card-img-top" alt=${name}>
+                        <img src="${img}" class="card-img-top img-card" alt=${name}>
                         <div class="card-body">
                         <h5 class="card-title"><a href="#">${name}</a></h5>
                         <p class="card-text">${desc}</p>
@@ -110,19 +109,29 @@ function login(){
                     `
                 
                 });
-                btnLogin.classList.toggle("d-none");
-                btnLogout.classList.toggle("d-none");
-                btnCarrito.classList.toggle("d-none");
-                btnReg.classList.toggle("d-none");
-                
-
-
-            }
+                btnLogin.classList.add("d-none");
+                btnLogout.classList.remove("d-none");
+                btnCarrito.classList.remove("d-none");
+                btnReg.classList.add("d-none");
+                formBuscar.classList.remove("d-none");
+            }    
         })
+        
+        if(!bandera){
+            
+                Swal.fire({
+                    title: 'Usuario o contraseña incorrecta',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                  })
+            
+        }
 }
 
 function logout(){
 
+    localStorage.setItem("loginOk", false);
+    bandera = false;
     check.checked = localStorage.getItem("check");
     userLog.value = localStorage.getItem("userLog")||"";
     passLog.value = localStorage.getItem("passLog")||"";
@@ -142,10 +151,10 @@ function logout(){
         </div>
         `
     });
-    btnLogin.classList.toggle("d-none");
-    btnLogout.classList.toggle("d-none");
-    btnCarrito.classList.toggle("d-none");
-    btnReg.classList.toggle("d-none");
+    btnLogin.classList.remove("d-none");
+    btnLogout.classList.add("d-none");
+    btnCarrito.classList.add("d-none");
+    btnReg.classList.remove("d-none");
 }
 
 
@@ -159,7 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 })
 
-vaciarCarrito.addEventListener("click", ()=>{
+vaciarCarrito.addEventListener("click", (e)=>{
+    
     carrito = [];
     mostrarCarrito();
     refreshCarritoContenedor()
@@ -268,4 +278,32 @@ function recordarCuenta(){
         localStorage.setItem("passLog", "");
     }
 }
+
+inputBuscar.addEventListener("input", (e)=>{
+    e.preventDefault();
+        productosFiltrados = stockProducts.filter(e =>
+        e.name.toLowerCase().includes(inputBuscar.value) 
+      )
+            
+      contenedor.innerHTML = "";
+     
+      productosFiltrados.forEach(element => {
+
+          const {id, name, quantity, desc, price, img} = element;
+          contenedor.innerHTML += `
+          <div class="card my-card" style="width: 18rem;">
+              <img src="${img}" class="card-img-top img-card" alt=${name}>
+              <div class="card-body">
+              <h5 class="card-title"><a href="#">${name}</a></h5>
+              <p class="card-text">${desc}</p>
+              <p class="card-text">Precio: $${price}</p>
+              <button onclick = "agregarProducto(${id})"class="btn btn-addcarry">AGREGAR AL CARRITO</button>
+              </div>
+          </div>
+          `
+      
+      });
+
+
+})
 
