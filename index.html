@@ -24,36 +24,12 @@
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid ">
         <a class="navbar-brand" href="#"><i class="fa-solid fa-sun-plant-wilt logo"></i></a>
-        
-        <div class="collapse navbar-collapse justify-content-center nav-div" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item li__nav">
-              <a class="btn nav-link active" aria-current="page" href="#">HOME</a>
-            </li>
-            <li class="nav-item li__nav">
-              <div class="dropdown">
-                <a class="btn nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  NUESTRAS PLANTAS
-                </a>
-
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Para interior</a></li>
-                  <li><a class="dropdown-item" href="#">Para exterior</a></li>
-                  <li><a class="dropdown-item" href="#">Todas</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item li__nav">
-              <a class="btn nav-link" href="#">TIPS Y CUIDADOS</a>
-            </li>
-            <li class="nav-item li__nav">
-              <a class="btn nav-link" href="#">FAQs</a>
-            </li>
-            <li class="nav-item li__nav">
-              <a class="btn nav-link">CONTACTANOS</a>
-            </li>
-          </ul>
-        </div>
+       
+       <!-- Button hambur -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="btn-container">
           <button type="button" class="btn btn-nav" id="btn-carrito" data-bs-toggle="modal" data-bs-target="#modal-carrito">
@@ -63,14 +39,28 @@
           <button type="button" class="btn btn-danger btn-log" id="btn-logout">Logout</button>
           <button type="button" class="btn btn-primary btn-reg d-none" id="btn-reg" data-bs-toggle="modal" data-bs-target="#modal-reg">Registrarse</button>
         </div>
+        
+        
+        <div class="collapse navbar-collapse justify-content-center nav-div" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item li__nav">
+              <a class="btn nav-link active" aria-current="page" href="#">HOME</a>
+            </li>
+            <li class="nav-item li__nav">
+              <a class="btn nav-link" aria-current="page" href="./PAGES/PLANTAS/todas.html">NUESTRAS PLANTAS</a>
+            </li>  
+          </ul>
+        </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        
+
+        
 
       </div>
+
+      
     </nav>
+    
 
   </header>
 
